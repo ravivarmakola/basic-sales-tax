@@ -1,0 +1,13 @@
+"ITEM_DESRIPTION","EXPECTED_EXCEPTION"
+                 ,java.lang.IllegalArgumentException
+""                 ,java.lang.IllegalArgumentException
+" "                 ,java.lang.IllegalArgumentException
+abcd             ,com.itemis.bst.exception.ConversionException
+1 item 12.49     ,com.itemis.bst.exception.ConversionException
+item 12.49       ,com.itemis.bst.exception.ConversionException
+12.49            ,com.itemis.bst.exception.ConversionException
+1                ,com.itemis.bst.exception.ConversionException
+item             ,com.itemis.bst.exception.ConversionException
+1.4 item at 12.49,com.itemis.bst.exception.ConversionException
+1 item at 12.4.9 ,com.itemis.bst.exception.ConversionException
+One item at 12.43,com.itemis.bst.exception.ConversionExceptionŌ
