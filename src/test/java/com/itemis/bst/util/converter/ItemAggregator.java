@@ -6,6 +6,8 @@ import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
 import org.junit.jupiter.params.aggregator.ArgumentsAggregationException;
 import org.junit.jupiter.params.aggregator.ArgumentsAggregator;
 
+import java.math.BigDecimal;
+
 public class ItemAggregator implements ArgumentsAggregator {
 
     @Override
@@ -14,6 +16,6 @@ public class ItemAggregator implements ArgumentsAggregator {
                 accessor.getString(2),
                 accessor.getBoolean(3),
                 accessor.getBoolean(4),
-                accessor.getDouble(5));
+                new BigDecimal(accessor.getString(5)));
     }
 }

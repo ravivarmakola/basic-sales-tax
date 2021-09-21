@@ -5,6 +5,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.math.BigDecimal;
+
 @AllArgsConstructor
 @Getter
 @ToString
@@ -14,5 +16,5 @@ public class Item {
     private String name;
     private boolean exempted;
     private boolean imported;
-    private double price;
+    private BigDecimal price;
 }
