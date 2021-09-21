@@ -22,7 +22,7 @@ public class BasicSalesTaxProcessorTest {
 
     @Test
     public void testProcessWithDifferentTaxes() {
-        assertThrows(ProcessingException.class, () -> testBasicSalesTax(null));
+        assertThrows(NullPointerException.class, () -> testBasicSalesTax(null));
     }
 
     private BigDecimal testBasicSalesTax(Item item) throws ProcessingException {
