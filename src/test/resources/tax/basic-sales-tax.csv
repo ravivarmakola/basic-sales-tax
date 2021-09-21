@@ -1,0 +1,9 @@
+"EXPECTED_TAX", "ITEM_UNIT","ITEM_NAME","IS_EXEMPTED","IS_IMPORTED","PRICE"
+1.249,"1","book",true,false,12.49
+1.059,"2","Harry potter books",true,false,10.59
+0.0,"1","music CD",false,false,14.99
+0.0,"2","music CDs",false,false,28.44
+1.000,"1","box of chocolates",true,true,10.00
+1.000,"2","box of chocolates",true,true,10.00
+0.0,"1","bottle of perfume",false,true,47.50
+0.0,"2","bottles of perfume",false,true,97.30
