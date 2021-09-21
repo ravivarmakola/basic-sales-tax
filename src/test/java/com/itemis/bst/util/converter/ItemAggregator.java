@@ -16,6 +16,6 @@ public class ItemAggregator implements ArgumentsAggregator {
                 accessor.getString(2),
                 accessor.getBoolean(3),
                 accessor.getBoolean(4),
-                new BigDecimal(accessor.getDouble(5)));
+                new BigDecimal(accessor.getString(5)));
     }
 }

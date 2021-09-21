@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class IOUtilTest {
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{index}")
     @CsvFileSource(resources = "/item-convert-failures.csv", numLinesToSkip = 1)
     public void testConvertWhenInvalidParameters(String lineItem, Class<? extends Throwable> exceptionClass) {
         assertThrows(exceptionClass, () -> IOUtil.convert(lineItem));
@@ -44,7 +44,7 @@ public class IOUtilTest {
                 Arguments.of(Arrays.asList("Invalid Line Item", "1 bottle of perfume at 18.99"), 1),
                 Arguments.of(Arrays.asList("Invalid Line Item", "Another invalid Line Item"), 0),
                 Arguments.of(Collections.EMPTY_LIST, 0),
-                Arguments.of(null, null)
+                Arguments.of(null, 0)
         );
     }
 
@@ -55,7 +55,7 @@ public class IOUtilTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"test-data-1.txt, 3", "test-data-2.txt,2", "test-data-3.txt,4"})
+    @CsvSource(value = {"src/test/resources/test-data-1.txt, 3", "src/test/resources/test-data-2.txt,2", "src/test/resources/test-data-3.txt,4"})
     public void testFileReadWhenValidFilePath(Path path, int numberOfLineItems) throws IOException {
         List<Item> actual = IOUtil.readFile(path.toFile().getAbsolutePath());
         assertEquals(numberOfLineItems, actual.size());
