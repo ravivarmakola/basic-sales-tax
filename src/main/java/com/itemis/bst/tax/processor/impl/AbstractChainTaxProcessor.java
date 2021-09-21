@@ -24,7 +24,11 @@ public abstract class AbstractChainTaxProcessor<E> implements TaxProcessor<E> {
      */
     @Override
     public BigDecimal process(E e) throws ProcessingException {
-        return processInternal(e);
+        BigDecimal value = processInternal(e);
+        if (nextProcessor == null) {
+            return value;
+        }
+        return value.add(nextProcessor.process(e));
     }
 
     /**
