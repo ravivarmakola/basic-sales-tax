@@ -44,6 +44,7 @@ public class BasicSalesTaxMain {
         }
         try {
             String outputFilePath = folder.toFile().getAbsolutePath() + "/output.txt";
+            System.out.println(response);
             System.out.println("Output File: " + outputFilePath);
             Files.write(Path.of(outputFilePath), response.toString().getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {
