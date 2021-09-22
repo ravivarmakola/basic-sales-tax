@@ -1,4 +1,4 @@
-package com.itemis.bst.io;
+package com.itemis.bst.util.io;
 
 import com.itemis.bst.exception.ConversionException;
 import com.itemis.bst.model.Item;
