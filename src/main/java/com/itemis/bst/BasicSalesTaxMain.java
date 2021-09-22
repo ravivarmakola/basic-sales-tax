@@ -7,28 +7,48 @@ import com.itemis.bst.tax.processor.TaxProcessingEngine;
 import com.itemis.bst.tax.processor.TaxProcessor;
 import com.itemis.bst.tax.processor.impl.BasicSalesTaxProcessor;
 import com.itemis.bst.tax.processor.impl.ImportedSalesTaxProcessor;
+import com.itemis.bst.util.Util;
 import com.itemis.bst.util.io.IOUtil;
-import lombok.extern.java.Log;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
-import java.util.logging.Level;
 
-@Log
 public class BasicSalesTaxMain {
     public static void main(String[] args) {
-        String filePath = System.getProperty("input-path");
+        String filePathArgument = "input-file";
+        String filePath = System.getProperty(filePathArgument);
+        if (Util.isNullOrEmpty(filePath) || !Path.of(filePath).isAbsolute()) {
+            System.err.println("Please pass a VM arg in format: -D" + filePathArgument + "=<Complete file path>");
+            return;
+        }
         try {
             List<Item> itemList = IOUtil.readFile(filePath);
-            log.info(itemList.toString());
             TaxProcessor processingChain = new BasicSalesTaxProcessor(new ImportedSalesTaxProcessor(null));
             TaxProcessingEngine taxProcessingEngine = new TaxProcessingEngine(processingChain);
             ProcessResponse response = taxProcessingEngine.calculateBill(itemList);
-            // TODO Write the output to file
+            printResponse(Path.of(filePath).getParent(), response);
         } catch (IOException e) {
-            log.log(Level.SEVERE, "Either the path ({0}) is wrong or the file doesn't exists", filePath);
+            System.err.println("Either the path (" + filePath + ") is wrong or the file doesn't exists");
         } catch (ProcessingException e) {
-            e.printStackTrace();
+            System.err.println("Unable to process request");
+        }
+    }
+
+    private static void printResponse(Path folder, ProcessResponse response) {
+        if (response == null) {
+            System.err.println("Unable to process request");
+            return;
+        }
+        try {
+            String outputFilePath = folder.toFile().getAbsolutePath() + "/output.txt";
+            System.out.println("Output File: " + outputFilePath);
+            Files.write(Path.of(outputFilePath), response.toString().getBytes(StandardCharsets.UTF_8));
+        } catch (IOException e) {
+            System.err.println("Unable to write to file. Please find the output below");
+            System.out.println(response.toString());
         }
     }
 }

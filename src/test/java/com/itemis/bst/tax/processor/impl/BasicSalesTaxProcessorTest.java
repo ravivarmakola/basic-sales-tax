@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BasicSalesTaxProcessorTest {
+
     @ParameterizedTest
     @CsvFileSource(resources = "/tax/basic-sales-tax.csv", numLinesToSkip = 1)
     public void testProcessWithDifferentTaxes(BigDecimal expectedPrice, @CsvToItem Item item) throws ProcessingException {
