@@ -5,6 +5,8 @@ import com.itemis.bst.tax.processor.TaxProcessor;
 
 import java.math.BigDecimal;
 
+import static com.itemis.bst.util.PropertyUtil.getPercent;
+
 /**
  * Processes a single Import Tax implementation
  */
@@ -16,7 +18,7 @@ public class ImportedSalesTaxProcessor extends AbstractChainTaxProcessor<Item> {
     @Override
     protected BigDecimal processInternal(Item item) {
         if (item.isImported()) {
-            return item.getPrice().multiply(BigDecimal.valueOf(0.05));
+            return item.getPrice().multiply(BigDecimal.valueOf(getPercent("app.basic.import.tax")));
         }
         return BigDecimal.valueOf(0.0);
     }
