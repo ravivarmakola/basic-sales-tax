@@ -7,6 +7,7 @@ import com.itemis.bst.tax.processor.TaxProcessingEngine;
 import com.itemis.bst.tax.processor.TaxProcessor;
 import com.itemis.bst.tax.processor.impl.BasicSalesTaxProcessor;
 import com.itemis.bst.tax.processor.impl.ImportedSalesTaxProcessor;
+import com.itemis.bst.util.PropertyUtil;
 import com.itemis.bst.util.Util;
 import com.itemis.bst.util.io.IOUtil;
 
@@ -18,6 +19,7 @@ import java.util.List;
 
 public class BasicSalesTaxMain {
     public static void main(String[] args) {
+        loadProperties();
         String filePathArgument = "input-file";
         String filePath = System.getProperty(filePathArgument);
         if (Util.isNullOrEmpty(filePath) || !Path.of(filePath).isAbsolute()) {
@@ -35,6 +37,10 @@ public class BasicSalesTaxMain {
         } catch (ProcessingException e) {
             System.err.println("Unable to process request");
         }
+    }
+
+    private static void loadProperties() {
+        PropertyUtil.load("src/main/resources/app.properties");
     }
 
     private static void printResponse(Path folder, ProcessResponse response) {
