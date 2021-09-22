@@ -15,6 +15,9 @@ public class ImportedSalesTaxProcessor extends AbstractChainTaxProcessor<Item> {
 
     @Override
     protected BigDecimal processInternal(Item item) {
-        return item.getPrice().multiply(BigDecimal.valueOf(0.05));
+        if (item.isImported()) {
+            return item.getPrice().multiply(BigDecimal.valueOf(0.05));
+        }
+        return BigDecimal.valueOf(0.0);
     }
 }

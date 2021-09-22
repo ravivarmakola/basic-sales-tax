@@ -62,7 +62,7 @@ public class TaxProcessingEngineTest {
             item = new Item(1, "X", false, false, new BigDecimal(netPricesArray[i]));
             String tax = taxesApplicableArray[i];
             tax = tax.substring(0, tax.length() - 1);
-            when(taxProcessor.process(item)).thenReturn(new BigDecimal(tax));
+            when(taxProcessor.process(item)).thenReturn(new BigDecimal(tax).multiply(new BigDecimal(netPricesArray[i])).divide(BigDecimal.valueOf(100)));
             itemList.add(item);
         }
         return itemList;
