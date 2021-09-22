@@ -11,6 +11,8 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.itemis.bst.util.Util.round;
+
 @RequiredArgsConstructor
 public class TaxProcessingEngine {
     @NonNull
@@ -40,10 +42,5 @@ public class TaxProcessingEngine {
             updatedList.add(updatedItem);
         }
         return new ProcessResponse(updatedList, totalSalesTax, totalPrice);
-    }
-
-    public static BigDecimal round(BigDecimal num, BigDecimal feed,
-                                   RoundingMode roundingMode) {
-        return feed.signum() == 0 ? num : num.divide(feed, 0, roundingMode).multiply(feed);
     }
 }

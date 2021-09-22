@@ -1,4 +1,4 @@
-package com.itemis.bst.io;
+package com.itemis.bst.util.io;
 
 import com.itemis.bst.exception.ConversionException;
 import com.itemis.bst.model.Item;
@@ -15,6 +15,8 @@ import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import static com.itemis.bst.util.Util.isNullOrEmpty;
 
 @Log
 public class IOUtil {
@@ -61,10 +63,6 @@ public class IOUtil {
             return false;
         }
         return exemptedList.stream().anyMatch(key::contains);
-    }
-
-    private static boolean isNullOrEmpty(String lineItem) {
-        return lineItem == null || lineItem.trim().isEmpty();
     }
 
     private static Pair<String, Boolean> extractProductName(String productName) throws ConversionException {
