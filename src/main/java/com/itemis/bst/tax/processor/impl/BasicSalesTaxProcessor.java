@@ -16,7 +16,7 @@ public class BasicSalesTaxProcessor extends AbstractChainTaxProcessor<Item> {
 
     @Override
     protected BigDecimal processInternal(Item item) {
-        if (item.isExempted()) {
+        if (!item.isExempted()) {
             return item.getPrice().multiply(BigDecimal.valueOf(0.1));
         }
         return BigDecimal.valueOf(0.0);
